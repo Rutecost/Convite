@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite para Encontro</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="conteudo">
+        <img src="img.img/RABAO.jpeg" alt="imagem grande" width="35%" height="35%">
+    </div>
+
+    <div id="section1" class="section">
+        <h1>Dois reais ou um encontro misterioso?</h1>
+        <p></h1>Acesse para uma melhor experiência:</h1>
+            <a href="https://open.spotify.com/intl-pt/track/7Jyo9NALaL16zPseuE2v9L?si=bc3a75c438724de8" target="_blank">
+                clique aqui
+            </a>
+        </h1></p>
+        <p>Sabemos qual você vai escolher...</p>
+        <button onclick="showSection('yesSection')">Sim</button>
+        <button onclick="showSection('noSection')">Não</button>
+        <button onclick="showSection('whySection')">Por que sim?</button>
+    </div>
+
+    <div id="yesSection" class="section hidden">
+        <p>Sem segredos! Onde você prefere?</p>
+        <button onclick="showSection('dateSection')">Mar e cerveja</button>
+        <button onclick="showSection('dateSection')">Filme duvidoso na minha casa</button>
+        <button onclick="showSection('dateSection')">Surpresa</button>
+        <br>
+        <button onclick="showSection('section1')">Voltar</button>
+    </div>
+
+    <div id="dateSection" class="section hidden">
+        <h2>Escolha o melhor dia para sair:</h2>
+        <input type="date" id="datePicker" placeholder="Melhor data">
+        <button onclick="confirmDate()">Confirmar</button>
+        <br>
+        <button onclick="showSection('yesSection')">Voltar</button>
+    </div>
+
+    <div id="finalSection" class="section hidden">
+        </h1>
+        <p id="finalMessage">Nos vemos em breve, não vai se arrepender, Lov!</p></h1>
+        <div id="feedback">
+            <p>Por favor, lance o Feedback do convite e se houver gostos ou sugestões especificas p/ o evento, fique à vontade:</p>
+            <textarea id="feedbackText" rows="4" cols="50" placeholder="Escreva suas considerações..."></textarea>
+            <br>
+            <button onclick="submitFeedback()">Finalizar comentários</button>
+        </div>
+        <br>
+        <button onclick="showSection('section1')">Voltar</button>
+    </div>
+
+    <div id="noSection" class="section hidden">
+        <p id="noMessage">Tenta a sorte mais uma vez</p>
+        <button onclick="handleNoClick()">Tentar novamente</button>
+        <br>
+        <button onclick="showSection('section1')">Voltar</button>
+    </div>
+
+    <div id="whySection" class="section hidden">
+        </h1>
+        <p>Pelo simples fato de que irei fazer você ter raiva de não ter saído comigo antes.</p></h1>
+        <button onclick="showSection('section1')">Voltar</button>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+
+        function showSection(sectionId) {
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function handleNoClick() {
+            noClickCount++;
+            let noMessage = document.getElementById('noMessage');
+            if (noClickCount === 1) {
+                noMessage.textContent = 'Tem mais algumas tentativas';
+            } else if (noClickCount === 2) {
+                noMessage.textContent = 'Bicho, não é possível que vai jogar essa oportunidade fora';
+            } else {
+                noMessage.textContent = 'Essa opção não é válida pra Senhorita, volte ao início!';
+                document.getElementById('noSection').querySelector('button').disabled = true;
+            }
+        }
+
+        function confirmDate() {
+            let date = document.getElementById('datePicker').value;
+            let finalMessage = document.getElementById('finalMessage');
+            if (date) {
+                finalMessage.textContent = `Nos vemos em breve no dia ${date}, não vai se arrepender,Lov!`;
+                showSection('finalSection');
+            } else {
+                alert('Por favor, selecione uma data.');
+            }
+        }
+
+        function submitFeedback() {
+            alert('Obrigada por participar, Gostosa! Preciso que print essa tela e me mande no chat');
+            document.getElementById('feedbackText').value = '';
+        }
+    </script>
+</body>
+</html>
